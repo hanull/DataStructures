@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Solution {
   
-  public static String infix_to_posfix(String input){
+  public static String infix_to_postfix(String input){
     String posFix = "";
     Stack<Character> stack = new Stack<>();
     int inputLength = input.length();
@@ -70,14 +70,39 @@ public class Solution {
     return -1;
   }
   
+  public static long tmpCal(long tmp1, long tmp2, char operator) {
+    if(operator=='+') {
+      return (tmp1 + tmp2);
+    }else if(operator=='-') {
+      return (tmp1 - tmp2);
+    }else if(operator=='*') {
+      return (tmp1 * tmp2);
+    }else {
+      return (tmp1 / tmp2);
+    }
+  }
+  
   public static long cal(String postFix) {
-    System.out.println(postFix);
-    return 0;
+    Stack<Long> stack = new Stack<>();
+    String[] splitPostFix = postFix.split(" ");
+    long tmp1,tmp2;
+    for(int i=0; i<splitPostFix.length; i++) {
+      if (isOperator(splitPostFix[i].charAt(0))) {
+        tmp1=stack.pop();
+        tmp2=stack.pop();
+        stack.push(tmpCal(tmp1,tmp2, splitPostFix[i].charAt(0)));
+      }else {
+        stack.push(Long.valueOf(splitPostFix[i]));
+      }
+    }
+    return stack.pop();
   }
   
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     String inputStr = sc.next();
-    System.out.println(cal(infix_to_posfix(inputStr)));
+    System.out.println("Infix : " + inputStr);
+    System.out.println("Postfix : " + infix_to_postfix(inputStr));
+    System.out.println(cal(infix_to_postfix(inputStr)));
   }
 }
