@@ -9,10 +9,19 @@ public class Main {
     arrayQueue.enqueue(10);
     arrayQueue.enqueue(20);
     arrayQueue.enqueue(30);
-    arrayQueue.print();
     System.out.println("큐 사이즈: "+arrayQueue.getSize());
     System.out.println("dequeue : " + arrayQueue.dequeue());
     System.out.println("큐 사이즈: "+arrayQueue.getSize());
-    arrayQueue.print();
+    System.out.println("---------------------------------------");
+    Stack_Queue<Integer> stackQueue = new Stack_Queue<>();
+    stackQueue.enqueue(10);
+    stackQueue.enqueue(20);
+    System.out.println("큐 사이즈 : " + stackQueue.getSize());
+    while(!stackQueue.isEmpty()) {
+      System.out.println("dequeue : "+stackQueue.dequeue());
+    }
+    System.out.println("큐 사이즈 : " + stackQueue.getSize());
+    System.out.println("---------------------------------------");
+    
   }
 }
